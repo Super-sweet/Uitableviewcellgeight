@@ -41,11 +41,31 @@
     }
 }
 
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSNumber *height = @(cell.frame.size.height);
     [self.heightAtIndexPath setObject:height forKey:indexPath];
+    
+    
+    NSArray * array = tableView.indexPathsForVisibleRows;
+    NSIndexPath * firstIndexPath = array [0];
+    cell.layer.anchorPoint = CGPointMake(0, 0.5);
+    cell.layer.position = CGPointMake(cell.layer.position.x, cell.layer.position.y);
+    if (firstIndexPath.row < indexPath.row) {
+        cell.layer.transform = CATransform3DMakeRotation(M_PI_2, 0, 0, 0.5);
+    }else {
+     cell.layer.transform = CATransform3DMakeRotation(-M_PI_2, 0, 0, 1.0);
+    }
+    cell.alpha = 0;
+    [UIView animateWithDuration:1.0 animations:^{
+        cell.layer.transform = CATransform3DIdentity;
+        cell.alpha = 1.0;
+    }];
+    
+    
 }
+
 
 #pragma mark - Getters
 - (NSMutableDictionary *)heightAtIndexPath

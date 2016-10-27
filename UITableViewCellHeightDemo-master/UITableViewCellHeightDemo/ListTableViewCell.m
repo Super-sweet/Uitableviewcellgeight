@@ -47,6 +47,14 @@
     CGContextMoveToPoint(contex, 0, rect.size.height-5);
     CGContextAddLineToPoint(contex, rect.size.width, rect.size.height-5);
     CGContextStrokePath(contex);
+    
+    CGContextRef cont = UIGraphicsGetCurrentContext();
+    CGContextSetRGBStrokeColor(cont, 0, 0, 0, 1.0);
+    CGContextSetLineWidth(cont, 0.1);
+    CGContextMoveToPoint(cont, 0, rect.size.height- 10);
+    CGContextAddLineToPoint(cont, rect.size.width-6  , rect.size.height -10);
+    CGContextStrokePath(cont);
+    
 
 }
 
